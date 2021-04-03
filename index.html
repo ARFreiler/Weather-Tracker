@@ -35,6 +35,20 @@
           </div>
         </div>
       </div>
+      <div class="row" id="dashboard">
+        <div class="col col-lg-3 py-3 bg-light" id="search-bar">
+          <form class="form-group" id="search-city">
+            <label for="city-name" class="h4">Search for a city:</label>
+            <div class="form-inline">
+              <input type="text" class="form-control w-75" id="city-name" />
+              <button type="submit" class="btn btn-primary" id="search">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+            <p class="text-danger" id="error"></p>
+          </form>
+        </div>
+      </div>
     </main>
     <script src="script.js"></script>
   </body>
