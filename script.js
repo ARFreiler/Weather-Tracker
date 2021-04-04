@@ -1,6 +1,15 @@
 console.log('Connected JS');
 
-let currentDay = moment();
+let todaysDate = moment();
 
-console.log(currentDay.format('dddd MMMM Do YYYY'));
-document.getElementById("currentDay").innerHTML = currentDay.format('dddd MMMM Do YYYY');
+console.log(todaysDate.format('dddd MMMM Do YYYY'));
+
+let button = document.getElementById("search");
+let city = document.getElementById("city-name");
+
+/* Sets city to local storage */
+document.getElementById("search").onclick = function setCity() {
+    var city = document.getElementById("city-name").value;
+    localStorage.setItem('location', city);
+}
+
