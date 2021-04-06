@@ -5,19 +5,22 @@ let todaysDate = moment();
 console.log(todaysDate.format('MMMM Do YYYY'));
 document.getElementById('current-city').innerHTML = todaysDate.format('(MMMM/Do/YYYY)');
 
-// let button = document.getElementById("search");
-// let city = document.getElementById("city-name");
+// Assigned variables
 let button = document.querySelector('#search');
 let inputValue = document.querySelector('#city-name').value;
 let currentCity = document.querySelector('#current-city');
 const API_KEY = 'ed5a824dd1bf2f56ad85d4425eb7d971';
+let long;
+let lat;
+
+// Unassigned
+let cityToday;
 let currentTemp;
 let currentHumidity;
 let currentWind;
 let currentUV;
 let forecast;
-let long;
-let lat;
+
 // Set current search to local storage
 function setCity(event) {
     event.preventDefault();
@@ -34,16 +37,18 @@ function appendCity(event) {
     newButton.textContent = document.getElementById("city-name").value;
     ul.appendChild(newButton);
     newButton.setAttribute('style', 'padding: 5px; text-align: left;')
-    console.log('Executed appendCity');
+    console.log('appendCity executed.');
 }
 
+// Event Listeners
 button.addEventListener("click", setCity);
 button.addEventListener("click", appendCity);
 
-/* API call for city's weather data */
+// API Call 
 button.addEventListener('click', function (event) {
     event.preventDefault();
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + document.getElementById("city-name").value + '&appid=ed5a824dd1bf2f56ad85d4425eb7d971&units=imperial')
+    let cityName = document.getElementById("city-name").value;
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=' + cityName + '&appid=ed5a824dd1bf2f56ad85d4425eb7d971&units=imperial')
         .then(function (response) {
             return response.json();
         })
@@ -60,6 +65,7 @@ button.addEventListener('click', function (event) {
                 .then(function (data) {
                     console.log(data);
                 })
+
         });
 
 });
