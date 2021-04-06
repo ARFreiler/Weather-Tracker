@@ -67,6 +67,7 @@ button.addEventListener('click', function (event) {
                 })
 
         });
+    document.getElementById('city-name').value = '';
 
 });
 
