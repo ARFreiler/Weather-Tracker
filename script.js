@@ -12,13 +12,14 @@ let currentCity = document.querySelector('#current-city');
 const API_KEY = 'ed5a824dd1bf2f56ad85d4425eb7d971';
 let long;
 let lat;
-
+let city;
+let cityTemp;
+let cityHumidity;
+let cityWind;
+let cityUV;
+let forecast;
 // Unassigned
-let cityToday;
 let currentTemp;
-let currentHumidity;
-let currentWind;
-let currentUV;
 let forecast;
 
 // Set current search to local storage
@@ -36,7 +37,7 @@ function appendCity(event) {
     var newButton = document.createElement('button');
     newButton.textContent = document.getElementById("city-name").value;
     ul.appendChild(newButton);
-    newButton.setAttribute('style', 'padding: 5px; text-align: left;')
+    // newButton.setAttribute('style', 'padding: 5px; text-align: left; border: none; background-color: white;')
     console.log('appendCity executed.');
 }
 
@@ -54,20 +55,32 @@ button.addEventListener('click', function (event) {
         })
         .then(function (data) {
             console.log(data);
-            // console.log(data.city.name);
             console.log(data.coord.lon + ' ' + data.coord.lat);
             long = data.coord.lon;
             lat = data.coord.lat;
+            city = data.name;
+            cityTemp = data.main.temp;
+            cityHumidity = data.main.humidity;
+            cityWind = data.wind.speed;
+            console.log(city);
+            console.log(cityTemp);
+            console.log(cityHumidity);
+            console.log(cityWind);
             fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + long + '&exclude={part}&appid=' + API_KEY)
                 .then(function (response) {
                     return response.json();
                 })
                 .then(function (data) {
                     console.log(data);
+                    cityUV = data.current.uvi;
+                    console.log(cityUV);
                 })
 
         });
     document.getElementById('city-name').value = '';
+
+    currentCity.innerHTML = todaysDate.format('(MMMM/Do/YYYY)');
+    console.log(currentCity);
 
 });
 

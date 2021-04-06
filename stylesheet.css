@@ -6,6 +6,13 @@
     background-color: red;
 }
 
+button {
+    background-color: white;
+    padding: 6px;
+    border: solid 0.5px lightgrey;
+    text-align: left;
+}
+
 button:hover {
     color: white;
     background-color: red;
