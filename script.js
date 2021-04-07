@@ -82,8 +82,8 @@ button.addEventListener('click', function (event) {
                 .then(function (data) {
                     console.log(data);
                     cityUV = data.current.uvi;
-                    forecast1 = data.daily[1];
-                    forecast2 = data.daily[2];
+                    forecast1 = data.daily[1].dt;
+                    forecast2 = data.daily[2].temp;
                     forecast3 = data.daily[3];
                     forecast4 = data.daily[4];
                     forecast5 = data.daily[5];
@@ -94,6 +94,11 @@ button.addEventListener('click', function (event) {
                     console.log(forecast4);
                     console.log(forecast5);
                     document.getElementById('uvi').innerHTML = cityUV;
+                    document.getElementById('forecast1').innerHTML = forecast1;
+                    document.getElementById('forecast2').innerHTML = forecast2;
+                    document.getElementById('forecast3').innerHTML = forecast3;
+                    document.getElementById('forecast4').innerHTML = forecast4;
+                    document.getElementById('forecast5').innerHTML = forecast5;
                 })
             document.getElementById('current-city').innerHTML = city + todaysDate.format(' ' + '(MMMM/Do/YYYY)');
             document.getElementById('temp').innerHTML = cityTemp;
