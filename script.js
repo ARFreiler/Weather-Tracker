@@ -9,6 +9,11 @@ document.getElementById('current-city').innerHTML = todaysDate.format('(MMMM/Do/
 let button = document.querySelector('#search');
 let inputValue = document.querySelector('#city-name').value;
 let currentCity = document.querySelector('#current-city');
+let currentStats = document.querySelector('#current-stats');
+let temp = document.querySelector('#temp');
+let humidity = document.querySelector('#humidity');
+let wind = document.querySelector('#wind');
+let uvi = document.querySelector('#uvi');
 const API_KEY = 'ed5a824dd1bf2f56ad85d4425eb7d971';
 let long;
 let lat;
@@ -17,10 +22,14 @@ let cityTemp;
 let cityHumidity;
 let cityWind;
 let cityUV;
-let forecast;
-// Unassigned
+let forecast1;
+let forecast2;
+let forecast3;
+let forecast4;
+let forecast5;
+
+// Unassigned variables
 let currentTemp;
-let forecast;
 
 // Set current search to local storage
 function setCity(event) {
@@ -73,14 +82,25 @@ button.addEventListener('click', function (event) {
                 .then(function (data) {
                     console.log(data);
                     cityUV = data.current.uvi;
+                    forecast1 = data.daily[1];
+                    forecast2 = data.daily[2];
+                    forecast3 = data.daily[3];
+                    forecast4 = data.daily[4];
+                    forecast5 = data.daily[5];
                     console.log(cityUV);
+                    console.log(forecast1);
+                    console.log(forecast2);
+                    console.log(forecast3);
+                    console.log(forecast4);
+                    console.log(forecast5);
+                    document.getElementById('uvi').innerHTML = cityUV;
                 })
+            document.getElementById('current-city').innerHTML = city + todaysDate.format(' ' + '(MMMM/Do/YYYY)');
+            document.getElementById('temp').innerHTML = cityTemp;
+            document.getElementById('humidity').innerHTML = cityHumidity;
+            document.getElementById('wind').innerHTML = cityWind;
 
         });
     document.getElementById('city-name').value = '';
-
-    currentCity.innerHTML = todaysDate.format('(MMMM/Do/YYYY)');
-    console.log(currentCity);
-
 });
 
