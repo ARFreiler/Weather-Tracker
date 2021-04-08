@@ -44,9 +44,8 @@ function appendCity(event) {
     event.preventDefault();
     var ul = document.querySelector('#search-history')
     var newButton = document.createElement('button');
-    newButton.textContent = document.getElementById("city-name").value;
+    newButton.textContent = document.getElementById("city-name").value.toUpperCase();
     ul.appendChild(newButton);
-    // newButton.setAttribute('style', 'padding: 5px; text-align: left; border: none; background-color: white;')
     console.log('appendCity executed.');
 }
 
@@ -83,17 +82,18 @@ button.addEventListener('click', function (event) {
                     console.log(data);
                     cityUV = data.current.uvi;
                     forecast1 = data.daily[1].dt;
-                    forecast2 = data.daily[2].temp;
-                    forecast3 = data.daily[3];
-                    forecast4 = data.daily[4];
-                    forecast5 = data.daily[5];
-                    console.log(cityUV);
-                    console.log(forecast1);
-                    console.log(forecast2);
-                    console.log(forecast3);
-                    console.log(forecast4);
-                    console.log(forecast5);
-                    document.getElementById('uvi').innerHTML = cityUV;
+                    forecast2 = data.daily[2].dt;
+                    forecast3 = data.daily[3].dt;
+                    forecast4 = data.daily[4].dt;
+                    forecast5 = data.daily[5].dt;
+                    forecast1 = data.daily[1].temp;
+                    // console.log(cityUV);
+                    // console.log(forecast1);
+                    // console.log(forecast2);
+                    // console.log(forecast3);
+                    // console.log(forecast4);
+                    // console.log(forecast5);
+                    document.getElementById('uvi').innerHTML = "UV Index: " + cityUV;
                     document.getElementById('forecast1').innerHTML = forecast1;
                     document.getElementById('forecast2').innerHTML = forecast2;
                     document.getElementById('forecast3').innerHTML = forecast3;
@@ -101,9 +101,9 @@ button.addEventListener('click', function (event) {
                     document.getElementById('forecast5').innerHTML = forecast5;
                 })
             document.getElementById('current-city').innerHTML = city + todaysDate.format(' ' + '(MMMM/Do/YYYY)');
-            document.getElementById('temp').innerHTML = cityTemp;
-            document.getElementById('humidity').innerHTML = cityHumidity;
-            document.getElementById('wind').innerHTML = cityWind;
+            document.getElementById('temp').innerHTML = "Temperature: " + cityTemp + " &#176F";
+            document.getElementById('humidity').innerHTML = "Humidity: " + cityHumidity + "%";
+            document.getElementById('wind').innerHTML = "Wind Speed: " + cityWind + " MPH";
 
         });
     document.getElementById('city-name').value = '';

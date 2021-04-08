@@ -17,3 +17,8 @@ button:hover {
     color: white;
     background-color: red;
 }
+
+.city-name {
+    font-size: 30px;
+    font-weight: 600;
+}

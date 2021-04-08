@@ -47,43 +47,90 @@
             </div>
             <p class="text-danger" id="error"></p>
           </form>
+
           <div class="card">
-            <div class="card-header h5 text-center" style="display: none;"></div>
+            <div class="card-header h5 text-center" style="display: none"></div>
             <ul class="list-group list-group-flush" id="search-history"></ul>
           </div>
         </div>
         <div class="col-lg-9 py-3" id="city-info" data-city="">
           <div class="w-100 h-100 d-flex" id="start-text">
-            <h2  id="current-city" class="m-auto font-weight-normal"></h2>
-               <!-- <ul id="current-stats"></ul>          -->
-               <p id="temp"></p>
-               <p id="humidity"></p>
-               <p id="wind"></p>
-               <p id=uvi></p>
+            <!-- <h2  id="current-city" class="m-auto font-weight-normal"></h2> -->
           </div>
-          <div class="row mb-4" id="curr-weather-row">
-            <div class="col">
-              <div class="card" id="current-weather"></div>
+
+        <div class="row">
+          <div class="col-12">
+            <span id="current-city" class="city-name align-middle"></span>
+            <img id="current-pic" src="placeholder" alt="" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p id="temp"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p id="humidity"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <p id="wind"></p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex">
+            <p id="uvi"></p>
+          </div>
+        </div>
+
+        <div class="row mb-4" id="curr-weather-row">
+          <div class="col">
+            <div class="card" id="current-weather"></div>
+          </div>
+        </div>
+        <div class="row" id="daily-weather-row">
+          <div class="col">
+            <h3>5-Day Forecast:</h3>
+            <div class="row" id="five-day-forecast-cards">
+              <div
+                id="forecast1"
+                class="col forecast bg-primary text-white ml-3 mb-3 rounded"
+              ></div>
+              <div
+                id="forecast2"
+                class="col forecast bg-primary text-white ml-3 mb-3 rounded"
+              ></div>
+              <div
+                id="forecast3"
+                class="col forecast bg-primary text-white ml-3 mb-3 rounded"
+              ></div>
+              <div
+                id="forecast4"
+                class="col forecast bg-primary text-white ml-3 mb-3 rounded"
+              ></div>
+              <div
+                id="forecast5"
+                class="col forecast bg-primary text-white ml-3 mb-3 rounded"
+              ></div>
             </div>
           </div>
-          <div class="row" id="daily-weather-row">
-            <div class="col">
-              <h3>5-Day Forecast:</h3>
-                  <div class="row" id="five-day-forecast-cards">
-                    <div id="forecast1" class="col forecast bg-primary text-white ml-3 mb-3 rounded"></div>
-                    <div id="forecast2" class="col forecast bg-primary text-white ml-3 mb-3 rounded"></div>
-                    <div id="forecast3" class="col forecast bg-primary text-white ml-3 mb-3 rounded"></div>
-                    <div id="forecast4" class="col forecast bg-primary text-white ml-3 mb-3 rounded"></div>
-                    <div id="forecast5" class="col forecast bg-primary text-white ml-3 mb-3 rounded"></div>
-                  </div>
-            </div>
-          </div>
-        </div>  
+        </div>
+      </div>
     </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+      crossorigin="anonymous"
+    ></script>
     <script src="script.js"></script>
   </body>
 </html>
