@@ -88,25 +88,31 @@ button.addEventListener('click', function (event) {
                     unixMilliSeconds = unixTime * 1000;
                     forecastDateObject = new Date(unixMilliSeconds);
                     forecastDate = forecastDateObject.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })
+                    let forecastElements = document.querySelectorAll('.forecast');
+                    for (let i = 0; i < forecastElements.length; i++) {
+                        forecastElements[i].innerHTML = '';
+                        let forecastIndex = i;
+                        let forecastDateElement = document.createElement('p');
+                        forecastDateElement.innerHTML = forecastDate;
+                        forecastElements[i].append(forecastDateElement);
+                        console.log(forecastDate);
+                        // let forecastWeatherElement = document.createElement("img");
+                        // forecastWeatherElement 
+                        let forecastTempElement = document.createElement('p');
+                        forecastTempElement.innerHTML = "Temp: " + cityTemp + " &#176F";
+                        forecastElements[i].append(forecastTempElement);
+                        let forecastHumidityElement = document.createElement('p');
+                        forecastHumidityElement.innerHTML = "Humidity: " + cityHumidity + "%";
+                        forecastElements[i].append(forecastHumidityElement);
+                    }
                     console.log(unixTime);
                     console.log(unixMilliSeconds);
                     console.log(forecastDateObject);
-                    console.log(forecastDate);
-                    // console.log(cityUV);
-                    // console.log(forecast1);
-                    // console.log(forecast2);
-                    // console.log(forecast3);
-                    // console.log(forecast4);
-                    // console.log(forecast5);
+                    // console.log(forecastDate);
                     document.getElementById('uvi').innerHTML = "UV Index: " + cityUV;
-                    document.getElementById('forecast1').innerHTML = forecastDate;
-                    document.getElementById('forecast2').innerHTML = forecast2;
-                    document.getElementById('forecast3').innerHTML = forecast3;
-                    document.getElementById('forecast4').innerHTML = forecast4;
-                    document.getElementById('forecast5').innerHTML = forecast5;
                 })
             document.getElementById('current-city').innerHTML = city + todaysDate.format(' ' + '(MMMM/Do/YYYY)');
-            document.getElementById('temp').innerHTML = "Temperature: " + cityTemp + " &#176F";
+            document.getElementById('temp').innerHTML = "Temperature: " + cityTemp + "&#176F";
             document.getElementById('humidity').innerHTML = "Humidity: " + cityHumidity + "%";
             document.getElementById('wind').innerHTML = "Wind Speed: " + cityWind + " MPH";
 
