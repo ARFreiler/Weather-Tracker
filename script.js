@@ -27,9 +27,12 @@ let forecast2;
 let forecast3;
 let forecast4;
 let forecast5;
-
+let unixTime;
+let unixMilliSeconds;
+let forecastDateObject;
 // Unassigned variables
 let currentTemp;
+let forecastDate;
 
 // Set current search to local storage
 function setCity(event) {
@@ -81,12 +84,14 @@ button.addEventListener('click', function (event) {
                 .then(function (data) {
                     console.log(data);
                     cityUV = data.current.uvi;
-                    forecast1 = data.daily[1].dt;
-                    forecast2 = data.daily[2].dt;
-                    forecast3 = data.daily[3].dt;
-                    forecast4 = data.daily[4].dt;
-                    forecast5 = data.daily[5].dt;
-                    forecast1 = data.daily[1].temp;
+                    unixTime = data.daily[1].dt;
+                    unixMilliSeconds = unixTime * 1000;
+                    forecastDateObject = new Date(unixMilliSeconds);
+                    forecastDate = forecastDateObject.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })
+                    console.log(unixTime);
+                    console.log(unixMilliSeconds);
+                    console.log(forecastDateObject);
+                    console.log(forecastDate);
                     // console.log(cityUV);
                     // console.log(forecast1);
                     // console.log(forecast2);
@@ -94,7 +99,7 @@ button.addEventListener('click', function (event) {
                     // console.log(forecast4);
                     // console.log(forecast5);
                     document.getElementById('uvi').innerHTML = "UV Index: " + cityUV;
-                    document.getElementById('forecast1').innerHTML = forecast1;
+                    document.getElementById('forecast1').innerHTML = forecastDate;
                     document.getElementById('forecast2').innerHTML = forecast2;
                     document.getElementById('forecast3').innerHTML = forecast3;
                     document.getElementById('forecast4').innerHTML = forecast4;
