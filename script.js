@@ -75,7 +75,7 @@ button.addEventListener('click', function (event) {
                 })
                 .then(function (data) {
                     console.log(data);
-                    cityUV = data.current.uvi;
+
 
                     let forecastElements = document.querySelectorAll('.forecast');
                     for (let i = 0; i < forecastElements.length; i++) {
@@ -98,8 +98,20 @@ button.addEventListener('click', function (event) {
                         forecastHumidityElement.innerHTML = "Humidity: " + data.daily[i + 1].humidity + "%";
                         forecastElements[i].append(forecastHumidityElement);
                     }
+                    cityUV = data.current.uvi;
                     document.getElementById('uvi').innerHTML = "UV Index: " + cityUV;
-                })
+                    if (cityUV <= 2.9) {
+                        document.getElementById('uvi').style.backgroundColor = '#80FF00';
+                    } else if (cityUV >= 3 && cityUV <= 5) {
+                        document.getElementById('uvi').style.backgroundColor = 'yellow';
+                    } else if (cityUV >= 6) {
+                        document.getElementById('uvi').style.backgroundColor = 'red';
+                    }
+
+                }
+
+
+                )
             document.getElementById('current-city').innerHTML = city + todaysDate.format(' ' + '(MMMM/Do/YYYY)');
             currentCity.appendChild(iconElement);
             document.getElementById('temp').innerHTML = "Temperature: " + cityTemp + "&#176F";
