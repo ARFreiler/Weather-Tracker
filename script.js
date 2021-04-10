@@ -1,5 +1,3 @@
-console.log('Connected JS');
-
 // Date Element
 let todaysDate = moment();
 console.log(todaysDate.format('MMMM Do YYYY'));
@@ -22,24 +20,15 @@ let cityTemp;
 let cityHumidity;
 let cityWind;
 let cityUV;
-let forecast1;
-let forecast2;
-let forecast3;
-let forecast4;
-let forecast5;
 let unixTime;
 let unixMilliSeconds;
 let forecastDateObject;
-// Unassigned variables
-let currentTemp;
-let forecastDate;
 
 // Set current search to local storage
 function setCity(event) {
     event.preventDefault();
     var city = document.getElementById("city-name").value;
     localStorage.setItem('location', city);
-    console.log(city + " executed.");
 }
 
 // Not console.logging or appending the li
@@ -49,7 +38,6 @@ function appendCity(event) {
     var newButton = document.createElement('button');
     newButton.textContent = document.getElementById("city-name").value.toUpperCase();
     ul.appendChild(newButton);
-    console.log('appendCity executed.');
 }
 
 // Event Listeners
@@ -96,8 +84,9 @@ button.addEventListener('click', function (event) {
                         forecastDateElement.innerHTML = forecastDate;
                         forecastElements[i].append(forecastDateElement);
                         console.log(forecastDate);
-                        // let forecastWeatherElement = document.createElement("img");
-                        // forecastWeatherElement 
+                        let forecastWeatherElement = document.createElement("img");
+                        forecastWeatherElement.setAttribute("src", "http://openweathermap.org/img/wn/" + data.daily[1].weather[0].icon + ".png");
+                        forecastElements[i].append(forecastWeatherElement);
                         let forecastTempElement = document.createElement('p');
                         forecastTempElement.innerHTML = "Temp: " + cityTemp + " &#176F";
                         forecastElements[i].append(forecastTempElement);
