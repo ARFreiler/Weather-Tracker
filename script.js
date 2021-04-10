@@ -1,7 +1,6 @@
 // Date Element
 let todaysDate = moment();
-console.log(todaysDate.format('MMMM Do YYYY'));
-document.getElementById('current-city').innerHTML = todaysDate.format('(MMMM/Do/YYYY)');
+// console.log(todaysDate.format('MMMM Do YYYY'));
 
 // Assigned variables
 let button = document.querySelector('#search');
@@ -23,6 +22,8 @@ let cityUV;
 let unixTime;
 let unixMilliSeconds;
 let forecastDateObject;
+let currentIcon;
+let currentIconElement;
 
 // Set current search to local storage
 function setCity(event) {
@@ -31,14 +32,19 @@ function setCity(event) {
     localStorage.setItem('location', city);
 }
 
-// Not console.logging or appending the li
+// Appending search value to ul
 function appendCity(event) {
     event.preventDefault();
     var ul = document.querySelector('#search-history')
     var newButton = document.createElement('button');
-    newButton.textContent = document.getElementById("city-name").value.toUpperCase();
+    newButton.textContent = document.getElementById("city-name").value;
     ul.appendChild(newButton);
 }
+
+// function toUpper() {
+//     event.preventDefault();
+//     return inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
+//     // }
 
 // Event Listeners
 button.addEventListener("click", setCity);
@@ -54,17 +60,21 @@ button.addEventListener('click', function (event) {
         })
         .then(function (data) {
             console.log(data);
-            console.log(data.coord.lon + ' ' + data.coord.lat);
+            // console.log(data.coord.lon + ' ' + data.coord.lat);
             long = data.coord.lon;
             lat = data.coord.lat;
             city = data.name;
             cityTemp = data.main.temp;
             cityHumidity = data.main.humidity;
             cityWind = data.wind.speed;
-            console.log(city);
-            console.log(cityTemp);
-            console.log(cityHumidity);
-            console.log(cityWind);
+            currentIcon = data.weather[0].icon;
+            iconElement = document.createElement("img");
+            iconElement.setAttribute("src", "http://openweathermap.org/img/wn/" + currentIcon + ".png");
+            // currentIcon = data.weather[0].icon;
+            // console.log(city);
+            // console.log(cityTemp);
+            // console.log(cityHumidity);
+            // console.log(cityWind);
             fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + long + '&exclude={part}&appid=' + API_KEY)
                 .then(function (response) {
                     return response.json();
@@ -79,7 +89,7 @@ button.addEventListener('click', function (event) {
                     let forecastElements = document.querySelectorAll('.forecast');
                     for (let i = 0; i < forecastElements.length; i++) {
                         forecastElements[i].innerHTML = '';
-                        let forecastIndex = i;
+                        let forecastIndex = data.daily[i];
                         let forecastDateElement = document.createElement('p');
                         forecastDateElement.innerHTML = forecastDate;
                         forecastElements[i].append(forecastDateElement);
@@ -94,13 +104,9 @@ button.addEventListener('click', function (event) {
                         forecastHumidityElement.innerHTML = "Humidity: " + cityHumidity + "%";
                         forecastElements[i].append(forecastHumidityElement);
                     }
-                    console.log(unixTime);
-                    console.log(unixMilliSeconds);
-                    console.log(forecastDateObject);
-                    // console.log(forecastDate);
                     document.getElementById('uvi').innerHTML = "UV Index: " + cityUV;
                 })
-            document.getElementById('current-city').innerHTML = city + todaysDate.format(' ' + '(MMMM/Do/YYYY)');
+            document.getElementById('current-city').innerHTML = city + todaysDate.format(' ' + '(MMMM/Do/YYYY)') + currentIcon;
             document.getElementById('temp').innerHTML = "Temperature: " + cityTemp + "&#176F";
             document.getElementById('humidity').innerHTML = "Humidity: " + cityHumidity + "%";
             document.getElementById('wind').innerHTML = "Wind Speed: " + cityWind + " MPH";

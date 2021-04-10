@@ -11,6 +11,7 @@ button {
     padding: 6px;
     border: solid 0.5px lightgrey;
     text-align: left;
+    text-transform: capitalize;
 }
 
 button:hover {
