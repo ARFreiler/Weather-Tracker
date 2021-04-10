@@ -75,7 +75,7 @@ button.addEventListener('click', function (event) {
             // console.log(cityTemp);
             // console.log(cityHumidity);
             // console.log(cityWind);
-            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + long + '&exclude={part}&appid=' + API_KEY)
+            fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + long + '&exclude={part}&appid=' + API_KEY + '&units=imperial')
                 .then(function (response) {
                     return response.json();
                 })
@@ -95,10 +95,10 @@ button.addEventListener('click', function (event) {
                         forecastElements[i].append(forecastDateElement);
                         console.log(forecastDate);
                         let forecastWeatherElement = document.createElement("img");
-                        forecastWeatherElement.setAttribute("src", "http://openweathermap.org/img/wn/" + data.daily[1].weather[0].icon + ".png");
+                        forecastWeatherElement.setAttribute("src", "http://openweathermap.org/img/wn/" + data.daily[i].weather[0].icon + ".png");
                         forecastElements[i].append(forecastWeatherElement);
                         let forecastTempElement = document.createElement('p');
-                        forecastTempElement.innerHTML = "Temp: " + cityTemp + " &#176F";
+                        forecastTempElement.innerHTML = "Temp: " + data.daily[i].temp.day + " &#176F";
                         forecastElements[i].append(forecastTempElement);
                         let forecastHumidityElement = document.createElement('p');
                         forecastHumidityElement.innerHTML = "Humidity: " + cityHumidity + "%";
