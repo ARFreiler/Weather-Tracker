@@ -1,6 +1,5 @@
 // Date Element
 let todaysDate = moment();
-// console.log(todaysDate.format('MMMM Do YYYY'));
 
 // Assigned variables
 let button = document.querySelector('#search');
@@ -24,6 +23,7 @@ let unixMilliSeconds;
 let forecastDateObject;
 let currentIcon;
 let currentIconElement;
+let listButton;
 
 // Set current search to local storage
 function setCity(event) {
@@ -37,14 +37,20 @@ function appendCity(event) {
     event.preventDefault();
     var ul = document.querySelector('#search-history')
     var newButton = document.createElement('button');
-    newButton.textContent = document.getElementById("city-name").value.charAt(0).toUpperCase() + document.getElementById("city-name").value.slice(1);;
+    newButton.setAttribute('id', 'new-button');
+    newButton.textContent = document.getElementById("city-name").value.charAt(0).toUpperCase() + document.getElementById("city-name").value.slice(1);
+    /* Adding call to button */
+    newButton.addEventListener('click', function (event) {
+        event.preventDefault();
+        listButton = document.getElementById('new-button').innerHTML;
+
+    })
+
+
+    /* Adding call to button */
     ul.appendChild(newButton);
 }
 
-// function toUpper() {
-//     event.preventDefault();
-//     return inputValue.charAt(0).toUpperCase() + inputValue.slice(1);
-//     // }
 
 // Event Listeners
 button.addEventListener("click", setCity);
@@ -102,7 +108,7 @@ button.addEventListener('click', function (event) {
                     document.getElementById('uvi').innerHTML = "UV Index: " + cityUV;
                     if (cityUV <= 2.9) {
                         document.getElementById('uvi').style.backgroundColor = '#80FF00';
-                    } else if (cityUV >= 3 && cityUV <= 5) {
+                    } else if (cityUV >= 3 && cityUV <= 5.9) {
                         document.getElementById('uvi').style.backgroundColor = 'yellow';
                     } else if (cityUV >= 6) {
                         document.getElementById('uvi').style.backgroundColor = 'red';
