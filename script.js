@@ -32,37 +32,84 @@ function setCity(event) {
     localStorage.setItem('location', city);
 }
 
-// Appending search value to ul
+// Appended buttons with API call
 function appendCity(event) {
     event.preventDefault();
     var ul = document.querySelector('#search-history')
     var newButton = document.createElement('button');
     newButton.setAttribute('id', 'new-button');
     newButton.textContent = document.getElementById("city-name").value.charAt(0).toUpperCase() + document.getElementById("city-name").value.slice(1);
-    /* Adding call to button */
     newButton.addEventListener('click', function (event) {
         event.preventDefault();
         listButton = document.getElementById('new-button').innerHTML;
-        console.log(listButton);
+        // console.log(listButton);
         fetch('https://api.openweathermap.org/data/2.5/weather?q=' + listButton + '&appid=ed5a824dd1bf2f56ad85d4425eb7d971&units=imperial')
-            .then(response => response.json())
-            .then(data => console.log(data));
-        console.log(data.main.name);
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                console.log(data);
+                long = data.coord.lon;
+                lat = data.coord.lat;
+                city = data.name;
+                currentIcon = data.weather[0].icon;
+                iconElement = document.createElement("img");
+                iconElement.setAttribute("src", "http://openweathermap.org/img/w/" + currentIcon + ".png");
+                cityTemp = data.main.temp;
+                cityHumidity = data.main.humidity;
+                cityWind = data.wind.speed;
+                fetch('https://api.openweathermap.org/data/2.5/onecall?lat=' + lat + '&lon=' + long + '&exclude={part}&appid=' + API_KEY + '&units=imperial')
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        console.log(data);
+                        let forecastElements = document.querySelectorAll('.forecast');
+                        for (let i = 0; i < forecastElements.length; i++) {
+                            forecastElements[i].innerHTML = '';
+                            let forecastIndex = data.daily[i];
+                            unixTime = data.daily[i + 1].dt;
+                            unixMilliSeconds = unixTime * 1000;
+                            forecastDateObject = new Date(unixMilliSeconds);
+                            forecastDate = forecastDateObject.toLocaleString("en-US", { month: "long", day: "numeric", year: "numeric" })
+                            let forecastDateElement = document.createElement('p');
+                            forecastDateElement.innerHTML = forecastDate;
+                            forecastElements[i].append(forecastDateElement);
+                            let forecastWeatherElement = document.createElement("img");
+                            forecastWeatherElement.setAttribute("src", "http://openweathermap.org/img/wn/" + data.daily[i + 1].weather[0].icon + ".png");
+                            forecastElements[i].append(forecastWeatherElement);
+                            let forecastTempElement = document.createElement('p');
+                            forecastTempElement.innerHTML = "Temp: " + data.daily[i + 1].temp.day + " &#176F";
+                            forecastElements[i].append(forecastTempElement);
+                            let forecastHumidityElement = document.createElement('p');
+                            forecastHumidityElement.innerHTML = "Humidity: " + data.daily[i + 1].humidity + "%";
+                            forecastElements[i].append(forecastHumidityElement);
+                        }
+                        cityUV = data.current.uvi;
+                        document.getElementById('uvi').innerHTML = "UV Index: " + cityUV;
+                        if (cityUV <= 2.9) {
+                            document.getElementById('uvi').style.backgroundColor = '#80FF00';
+                        } else if (cityUV >= 3 && cityUV <= 5.9) {
+                            document.getElementById('uvi').style.backgroundColor = 'yellow';
+                        } else if (cityUV >= 6) {
+                            document.getElementById('uvi').style.backgroundColor = 'red';
+                        }
+                    })
+            });
+        document.getElementById('current-city').innerHTML = city + todaysDate.format(' ' + '(MMMM/Do/YYYY)');
+        currentCity.appendChild(iconElement);
+        document.getElementById('temp').innerHTML = "Temperature: " + cityTemp + "&#176F";
+        document.getElementById('humidity').innerHTML = "Humidity: " + cityHumidity + "%";
+        document.getElementById('wind').innerHTML = "Wind Speed: " + cityWind + " MPH";
     })
     ul.appendChild(newButton);
 }
-
-
-/* Adding call to button */
-
-
-
 
 // Event Listeners
 button.addEventListener("click", setCity);
 button.addEventListener("click", appendCity);
 
-// API Call 
+// Initial API Call 
 button.addEventListener('click', function (event) {
     event.preventDefault();
     let cityName = document.getElementById("city-name").value;
@@ -87,8 +134,6 @@ button.addEventListener('click', function (event) {
                 })
                 .then(function (data) {
                     console.log(data);
-
-
                     let forecastElements = document.querySelectorAll('.forecast');
                     for (let i = 0; i < forecastElements.length; i++) {
                         forecastElements[i].innerHTML = '';
@@ -119,11 +164,7 @@ button.addEventListener('click', function (event) {
                     } else if (cityUV >= 6) {
                         document.getElementById('uvi').style.backgroundColor = 'red';
                     }
-
-                }
-
-
-                )
+                })
             document.getElementById('current-city').innerHTML = city + todaysDate.format(' ' + '(MMMM/Do/YYYY)');
             currentCity.appendChild(iconElement);
             document.getElementById('temp').innerHTML = "Temperature: " + cityTemp + "&#176F";
