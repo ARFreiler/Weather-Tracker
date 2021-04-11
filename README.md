@@ -38,9 +38,11 @@ Open index.html in Chrome.
 
 ## Links
 
-[Repository]()
+[Repository](https://github.com/ARFreiler/Weather-Tracker)
 
-[Deployed Page]()
+[Deployed Page](https://arfreiler.github.io/Weather-Tracker/)
+
+![](https://user-images.githubusercontent.com/75546695/114319958-adda0e00-9ae1-11eb-9a9b-5a145cafbb11.png)
 
 ## License
 
