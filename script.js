@@ -43,7 +43,6 @@ function appendCity(event) {
     newButton.addEventListener('click', function (event) {
         event.preventDefault();
         listButton = document.getElementById('new-button').innerHTML;
-        // console.log(listButton);
         fetch('https://api.openweathermap.org/data/2.5/weather?q=' + listButton + '&appid=ed5a824dd1bf2f56ad85d4425eb7d971&units=imperial')
             .then(function (response) {
                 return response.json();
