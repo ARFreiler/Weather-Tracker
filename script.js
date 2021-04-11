@@ -24,6 +24,7 @@ let forecastDateObject;
 let currentIcon;
 let currentIconElement;
 let listButton;
+let uvElement;
 
 // Set current search to local storage
 function setCity(event) {
@@ -158,11 +159,11 @@ button.addEventListener('click', function (event) {
                     cityUV = data.current.uvi;
                     document.getElementById('uvi').innerHTML = "UV Index: " + cityUV;
                     if (cityUV <= 2.9) {
-                        document.getElementById('uvi').style.backgroundColor = '#80FF00';
+                        document.getElementById('uvi').style = "background-color: #80FF00; color: black;";
                     } else if (cityUV >= 3 && cityUV <= 5.9) {
-                        document.getElementById('uvi').style.backgroundColor = 'yellow';
+                        document.getElementById('uvi').style = "background-color: yellow; color: black;";
                     } else if (cityUV >= 6) {
-                        document.getElementById('uvi').style.backgroundColor = 'red';
+                        document.getElementById('uvi').style = "background-color: red; color: white;";
                     }
                 })
             document.getElementById('current-city').innerHTML = city + todaysDate.format(' ' + '(MMMM/Do/YYYY)');
