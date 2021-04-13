@@ -156,13 +156,14 @@ button.addEventListener('click', function (event) {
                         forecastElements[i].append(forecastHumidityElement);
                     }
                     cityUV = data.current.uvi;
-                    document.getElementById('uvi').innerHTML = "UV Index: " + cityUV;
+                    document.getElementById('uvi').innerHTML = "UV Index: <span id='uvspan'>" + cityUV + "</span>";
+                    document.getElementById('uvspan').innerHTML = cityUV;
                     if (cityUV <= 2.9) {
-                        document.getElementById('uvi').style = "background-color: #80FF00; color: black;";
+                        document.getElementById('uvspan').style = "background-color: #80FF00; color: black;";
                     } else if (cityUV >= 3 && cityUV <= 5.9) {
-                        document.getElementById('uvi').style = "background-color: yellow; color: black;";
+                        document.getElementById('uvspan').style = "background-color: yellow; color: black;";
                     } else if (cityUV >= 6) {
-                        document.getElementById('uvi').style = "background-color: red; color: white;";
+                        document.getElementById('uvspan').style = "background-color: red; color: white;";
                     }
                 })
             document.getElementById('current-city').innerHTML = city + todaysDate.format(' ' + '(MMMM/Do/YYYY)');
